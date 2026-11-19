@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 18th Birthday Snehal — My Babduu ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --crimson: #c2185b;
+            --rose: #ff4b7d;
+            --royal-blue: #0f2942;
+            --gold: #ffd700;
+            --gold-soft: #ffe885;
+            --blush: #fff5f8;
+            --dark: #23111a;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #2a0a1e 0%, #120610 100%);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Floating Music Player Pill */
+        .music-toggle {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 999;
+            background: rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 215, 0, 0.45);
+            color: var(--gold);
+            padding: 9px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+            transition: all 0.25s ease;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.05);
+            background: rgba(255, 215, 0, 0.22);
+        }
+
+        /* Ambient Floating Particles */
+        .ambient-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            bottom: -40px;
+            animation: floatUp linear infinite;
+            opacity: 0.65;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0.85; }
+            100% { transform: translateY(-108vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        /* ================= STAGE 1: 20 TAPS OF LOVE ================= */
+        #tap-stage {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px 18px;
+            transition: opacity 0.8s ease;
+        }
+
+        .tap-vault {
+            max-width: 470px;
+            width: 100%;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04));
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border: 1px solid rgba(255, 215, 0, 0.42);
+            border-radius: 30px;
+            padding: 36px 24px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(255, 215, 0, 0.08);
+        }
+
+        .gold-pill {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.16);
+            border: 1px solid rgba(255, 215, 0, 0.55);
+            color: var(--gold);
+            padding: 5px 16px;
+            border-radius: 30px;
+            font-size: 0.76rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .tap-vault h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.3rem;
+            background: linear-gradient(to right, #ffffff, #ffe082, #ff9ebb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+
+        .tap-sub {
+            font-size: 0.92rem;
+            color: #f8d0dc;
+            margin-bottom: 22px;
+            line-height: 1.55;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff4b7d, #ffd700);
+            border-radius: 20px;
+            transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .counter-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 22px;
+        }
+
+        .heart-btn {
+            width: 138px;
+            height: 138px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 215, 0, 0.8);
+            background: radial-gradient(circle at 30% 30%, #ff6b95 0%, #c2185b 75%, #880e4f 100%);
+            color: white;
+            font-size: 3.1rem;
+            cursor: pointer;
+            box-shadow: 0 15px 40px rgba(255, 75, 125, 0.65);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 22px;
+            transition: transform 0.12s ease;
+            user-select: none;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .heart-btn span {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .heart-btn:active {
+            transform: scale(0.87);
+            animation: none;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.08); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.06); }
+        }
+
+        .memory-ticker {
+            min-height: 82px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 215, 0, 0.35);
+            border-radius: 18px;
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ticker-tag {
+            font-size: 0.74rem;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .ticker-msg {
+            font-size: 0.95rem;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        /* ================= STAGE 2: GRAND 18TH BIRTHDAY EXPERIENCE ================= */
+        #grand-stage {
+            display: none;
+            position: relative;
+            z-index: 2;
+            background: var(--blush);
+            color: var(--dark);
+            animation: grandFadeIn 1s ease forwards;
+        }
+
+        @keyframes grandFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Royal Hero Section */
+        .royal-hero {
+            min-height: 95vh;
+            background: linear-gradient(135deg, rgba(15, 41, 66, 0.9) 0%, rgba(154, 17, 67, 0.86) 55%, rgba(28, 7, 18, 0.94) 100%),
+                        url('1000443411.webp') no-repeat center center/cover;
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        .crown-frame {
+            width: 205px;
+            height: 205px;
+            border-radius: 50%;
+            padding: 6px;
+            background: linear-gradient(45deg, #ffd700, #ff4b7d, #00bcd4, #ffd700);
+            background-size: 300% 300%;
+            animation: shimmerBorder 4s ease infinite;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+            margin-bottom: 18px;
+        }
+
+        @keyframes shimmerBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .crown-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            border-radius: 50%;
+            border: 3px solid #fff;
+        }
+
+        .royal-hero h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.8rem;
+            background: linear-gradient(to right, #ffffff, #ffe082, #ffb6c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.12;
+            margin-bottom: 10px;
+        }
+
+        .royal-hero p {
+            max-width: 620px;
+            font-size: 1.12rem;
+            color: #ffe6ee;
+            margin-bottom: 26px;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            background: linear-gradient(45deg, #ffd700, #ffb300);
+            color: #23111a;
+            padding: 14px 34px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 10px 28px rgba(255, 215, 0, 0.42);
+            transition: transform 0.25s ease;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px) scale(1.03);
+        }
+
+        /* Section Containers */
+        .wrap {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        .wrap h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.6rem;
+            color: var(--crimson);
+            margin-bottom: 6px;
+        }
+
+        .wrap-sub {
+            color: #6b535e;
+            font-size: 0.98rem;
+            margin-bottom: 36px;
+        }
+
+        /* Featured Couple Portrait Showcase ("Udhaar ❤️") */
+        .couple-showcase {
+            max-width: 680px;
+            margin: 0 auto 20px;
+            background: linear-gradient(145deg, #4b071c, #24050f);
+            border: 2px solid var(--gold);
+            border-radius: 26px;
+            padding: 22px;
+            box-shadow: 0 20px 50px rgba(75, 7, 28, 0.32);
+            color: var(--white);
+            cursor: pointer;
+            transition: transform 0.35s ease;
+        }
+
+        .couple-showcase:hover {
+            transform: translateY(-6px);
+        }
+
+        .couple-img-frame {
+            width: 100%;
+            max-height: 480px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 215, 0, 0.45);
+        }
+
+        .couple-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+        }
+
+        .couple-caption {
+            padding-top: 16px;
+        }
+
+        .couple-caption h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .couple-caption p {
+            font-size: 0.94rem;
+            color: #ffdce5;
+        }
+
+        /* Interactive Envelope Love Letter */
+        .envelope-container {
+            max-width: 720px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 36px 28px;
+            box-shadow: 0 15px 40px rgba(194, 24, 91, 0.12);
+            border: 1px solid rgba(194, 24, 91, 0.18);
+            position: relative;
+        }
+
+        .wax-seal-btn {
+            background: radial-gradient(circle, #e91e63, #880e4f);
+            color: var(--gold);
+            border: 3px solid var(--gold);
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            font-size: 1.9rem;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(194, 24, 91, 0.4);
+            margin: 10px auto 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .wax-seal-btn:hover {
+            transform: scale(1.08) rotate(8deg);
+        }
+
+        .letter-content {
+            display: none;
+            text-align: left;
+            margin-top: 22px;
+            padding-top: 22px;
+            border-top: 1px dashed #f48fb1;
+            line-height: 1.9;
+            font-size: 1.04rem;
+            color: #3a232e;
+            animation: unfoldLetter 0.7s ease forwards;
+        }
+
+        @keyframes unfoldLetter {
+            from { opacity: 0; transform: translateY(-12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .letter-content p {
+            margin-bottom: 16px;
+        }
+
+        /* 4-Photo Saree Gallery with Lightbox Zoom */
+        .saree-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+            gap: 22px;
+        }
+
+        .saree-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
+            cursor: pointer;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .saree-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 38px rgba(194, 24, 91, 0.22);
+        }
+
+        .saree-img-box {
+            width: 100%;
+            height: 325px;
+            overflow: hidden;
+            background: #1a1a1a;
+            position: relative;
+        }
+
+        .saree-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.5s ease;
+        }
+
+        .saree-card:hover .saree-img-box img {
+            transform: scale(1.07);
+        }
+
+        .saree-img-box img.rotate-fix {
+            transform: rotate(-90deg) scale(1.45);
+            object-position: center center;
+        }
+
+        .saree-card:hover .saree-img-box img.rotate-fix {
+            transform: rotate(-90deg) scale(1.55);
+        }
+
+        .saree-meta {
+            padding: 15px 14px;
+        }
+
+        .saree-meta h4 {
+            color: var(--crimson);
+            font-size: 1.02rem;
+            margin-bottom: 4px;
+        }
+
+        .saree-meta p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Fullscreen Photo Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(15, 5, 12, 0.92);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 75vh;
+            border-radius: 16px;
+            border: 3px solid var(--gold);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        .lightbox img.lb-rotate {
+            transform: rotate(-90deg);
+            max-width: 65vh;
+            max-height: 85vw;
+        }
+
+        .lightbox-caption {
+            color: var(--gold);
+            margin-top: 16px;
+            font-size: 1.05rem;
+            text-align: center;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Flip Memory Cards (Interactive 3D Cards) */
+        .flip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            height: 210px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.65s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-front, .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 18px;
+            padding: 22px 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .flip-front {
+            background: var(--white);
+            border-bottom: 4px solid var(--crimson);
+            color: var(--royal-blue);
+        }
+
+        .flip-front i {
+            font-size: 2.2rem;
+            color: var(--crimson);
+            margin-bottom: 12px;
+        }
+
+        .flip-front span {
+            font-size: 0.78rem;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        .flip-back {
+            background: linear-gradient(135deg, #0f2942, #ad1457);
+            color: var(--white);
+            transform: rotateY(180deg);
+            border: 1px solid var(--gold);
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        /* Timeline */
+        .timeline {
+            max-width: 750px;
+            margin: 0 auto;
+            text-align: left;
+            border-left: 3px solid var(--crimson);
+            padding-left: 26px;
+        }
+
+        .t-node {
+            background: var(--white);
+            padding: 20px 24px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .t-node::before {
+            content: '❤️';
+            position: absolute;
+            left: -39px;
+            top: 20px;
+            background: var(--blush);
+            padding: 2px;
+        }
+
+        .t-date {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--crimson);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .t-node h3 {
+            color: var(--royal-blue);
+            font-size: 1.12rem;
+            margin: 4px 0 6px;
+        }
+
+        .t-node p {
+            font-size: 0.94rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Redeemable Gift Vouchers */
+        .voucher-vault {
+            background: linear-gradient(135deg, #0f2942, #880e4f);
+            color: white;
+            border-radius: 26px;
+            padding: 45px 24px;
+            box-shadow: 0 18px 40px rgba(15, 41, 66, 0.28);
+        }
+
+        .voucher-vault h2 {
+            color: var(--gold);
+        }
+
+        .vouchers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .voucher-item {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1.5px dashed var(--gold);
+            border-radius: 16px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .voucher-item:hover {
+            background: rgba(255, 215, 0, 0.18);
+            transform: translateY(-4px);
+        }
+
+        .voucher-item strong {
+            display: block;
+            color: var(--gold);
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+        }
+
+        .voucher-status {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.76rem;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 4px 12px;
+            border-radius: 20px;
+            color: #ffe082;
+        }
+
+        /* Final Candle Blow Celebration */
+        .cake-box {
+            margin-top: 40px;
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            border-radius: 20px;
+            padding: 26px 20px;
+        }
+
+        .candle-btn {
+            background: linear-gradient(45deg, #ffd700, #ff9800);
+            color: #23111a;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        footer {
+            background: linear-gradient(90deg, #0f2942, #ad1457);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        footer span {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.1rem;
+            color: var(--gold);
+        }
+
+        @media (max-width: 600px) {
+            .tap-vault h1 { font-size: 2.75rem; }
+            .royal-hero h1 { font-size: 3.4rem; }
+            .crown-frame { width: 170px; height: 170px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Soft Romantic Piano Melody Synthesizer Toggle -->
+    <button class="music-toggle" id="musicBtn" onclick="toggleMelody()">
+        <i class="fas fa-music"></i> <span id="musicText">Play Birthday Tune</span>
+    </button>
+
+    <div class="ambient-bg" id="ambientBg"></div>
+
+    <!-- ================= STAGE 1: 20 TAPS OF LOVE ================= -->
+    <div id="tap-stage">
+        <div class="tap-vault">
+            <div class="gold-pill">✨ Born 20 Nov 2008 &bull; 20 Taps of Love ✨</div>
+            <h1>20 Taps For My Babduu!</h1>
+            <p class="tap-sub">
+                20 November sathi 20 special taps! Pratyek tap var aapli ek memory unlock hoil, ani <strong>20th tap</strong> var tujha Grand 18th Birthday Surprise open hoil 😘
+            </p>
+
+            <div class="progress-track">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="counter-label" id="counterLabel">0 / 20 Taps Unlocked ❤️</div>
+
+            <button class="heart-btn" id="heartBtn" onclick="tapHeart()">
+                ❤️
+                <span>Tap Here</span>
+            </button>
+
+            <div class="memory-ticker">
+                <div class="ticker-tag" id="tickerTag">Ready, Majhi Bayko?</div>
+                <div class="ticker-msg" id="tickerMsg">Dil par 20 baar tap kar, Snehal! 🎁</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= STAGE 2: GRAND 18TH BIRTHDAY EXPERIENCE ================= -->
+    <div id="grand-stage">
+        <!-- Royal Hero -->
+        <div class="royal-hero">
+            <div class="crown-frame">
+                <img src="./Images/retouch_2026111422393541.jpg" alt="My Queen Snehal" >
+            </div>
+            <div class="gold-pill">👑 20 November 2008 — Celebrating 18 Years 👑</div>
+            <h1>Happy 18th Birthday, Snehal!</h1>
+            <p>
+                20 taps poore zale, Majhi Bayko! ❤️<br>
+                Welcome to your personal birthday world—crafted with endless love by your Husband!
+            </p>
+            <a href="#our-couple-pic" class="hero-cta">See Our Special Moment ❤️</a>
+        </div>
+
+        <!-- Featured Couple Portrait ("Udhaar ❤️") -->
+        <div class="wrap" id="our-couple-pic">
+            <h2>Together Forever</h2>
+            <p class="wrap-sub">You & Me — My Favourite Frame in the World</p>
+            <div class="couple-showcase" onclick="openLightbox('./Images/Both.jpg', 'Udhaar ❤️ — Forever Together, Majhi Bayko & Your Husband 😘', false)">
+                <div class="couple-img-frame">
+                    <img src="./Images/Both.jpg" alt="Us Together - Udhaar">
+                </div>
+                <div class="couple-caption">
+                    <h3>Me❤️Love</h3>
+                    <p>Sending you endless flying kisses & love on your 18th Birthday! (Tap photo to zoom)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Wax-Seal Love Letter -->
+        <div class="wrap" id="secret-letter">
+            <h2>A Secret Letter For My Babduu</h2>
+            <p class="wrap-sub">Tap the golden heart seal below to unfold your letter</p>
+            <div class="envelope-container">
+                <button class="wax-seal-btn" id="sealBtn" onclick="openEnvelope()">
+                    <i class="fas fa-heart"></i>
+                </button>
+                <p id="sealHint" style="font-size: 0.9rem; color: #c2185b; font-weight: 500;">Tap the Golden Seal to Open 💌</p>
+
+                <div class="letter-content" id="letterBody">
+                    <p><strong>Aga Babduu,</strong></p>
+                    <p>
+                        20 November 2008 ha divas majhyasathi saglyat special aahe, karan ya divshi majhi dream girl ya jagat aali. 7 May 2025 chya pahilya chat pasun te 24 July chya pahilya call paryant, ani 21 March chya pahilya bheti pasun te aajparyant—tujhyasobat ghalavlela pratyek kshan majhyasathi ek blessing aahe.
+                    </p>
+                    <p>
+                        Tujha smile, tuzha awaaz, tuzha laajna, saree madhla tuzha to dream girl look, ani 3 taas 9 minutes cha aapla non-stop video call—mi kahiich visru shakat nahi. Tu dileli <strong>Guardian Bell</strong> ani 12 November la tujhya swatahchya hatatun dilela <strong>bracelet</strong> mi lifetime japun thevnar aahe.
+                    </p>
+                    <p>
+                        Tu fakt majhi favourite person nahiyes, <strong>tu majhi bayko aahes</strong>. Happy 18th Birthday, my love!
+                    </p>
+                    <p style="margin-top: 20px;">
+                        <strong>I love you endlessly, Babduu!</strong><br>
+                        <span style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #c2185b;">Forever Yours, Your Loving Husband ❤️</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 Saree Photos Gallery with Fullscreen Lightbox -->
+        <div class="wrap">
+            <h2>My Dream Girl in Saree</h2>
+            <p class="wrap-sub">"Saree madhli majhi bayko ekdam dream girl!" (Tap any photo to view full screen)</p>
+            <div class="saree-grid">
+                <div class="saree-card" onclick="openLightbox('./Images/retouch_2026111422393541.jpg', 'That Magical Smile — Tujhya smile varun nazar hatavavich vatat nahi ❤️', false)">
+                    <div class="saree-img-box">
+                        <img src="./Images/retouch_2026111422393541.jpg" alt="Snehal Smile">
+                    </div>
+                    <div class="saree-meta">
+                        <h4>That Magical Smile</h4>
+                        <p>Tujhya smile varun nazar hatavavich vatat nahi ❤️</p>
+                    </div>
+                </div>
+
+                <div class="saree-card" onclick="openLightbox('./Images/retouch_2026111422435546.jpg', 'Tuzhe Cute Nakhre — Red & blue saree madhli majhi queen ✨', false)">
+                    <div class="saree-img-box">
+                        <img src="./Images/retouch_2026111422435546.jpg" alt="Snehal Full Saree">
+                    </div>
+                    <div class="saree-meta">
+                        <h4>Tuzhe Cute Nakhre</h4>
+                        <p>Red & blue saree madhli majhi queen ✨</p>
+                    </div>
+                </div>
+
+                <div class="saree-card" onclick="openLightbox('./Images/retouch_2026111422444265.jpg', 'Chudiyaan & Bracelet — Every small detail stays in my heart 💙', false)">
+                    <div class="saree-img-box">
+                        <img src="./Images/retouch_2026111422444265.jpg" alt="Blue Bangles">
+                    </div>
+                    <div class="saree-meta">
+                        <h4>Chudiyaan & Bracelet</h4>
+                        <p>Every small memory of yours stays in my heart 💙</p>
+                    </div>
+                </div>
+
+                <div class="saree-card" onclick="openLightbox('./Images/retouch_2026111422455497.jpg', 'Golden Sunlight Glow — Forever my favourite view 😘', true)">
+                    <div class="saree-img-box">
+                        <img src="./Images/retouch_2026111422455497.jpg" alt="Sunlight Glow">
+                    </div>
+                    <div class="saree-meta">
+                        <h4>Golden Sunlight Glow</h4>
+                        <p>Forever my favourite view 😘</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3D Flip Cards: Precious Keepsakes -->
+        <div class="wrap">
+            <h2>Our Precious Keepsakes</h2>
+            <p class="wrap-sub">Tap each card to flip and read our memory</p>
+            <div class="flip-grid">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <i class="fas fa-bell"></i>
+                            <h3>The Guardian Bell</h3>
+                            <span>Tap to flip ↻</span>
+                        </div>
+                        <div class="flip-back">
+                            21 March 2026 la aaplya pahilya bhetit tu dileli Guardian Bell aajhi majhyasobat aahe—tujhya premachi ani care chi lifetime athavan! 🔔❤️
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <i class="fas fa-ring"></i>
+                            <h3>Your Wrist Bracelet</h3>
+                            <span>Tap to flip ↻</span>
+                        </div>
+                        <div class="flip-back">
+                            12 November la tujhya swatahchya hatatun dilela bracelet fakt ek gift nahi, tar tujha prem ani aapla tight hug aahe! 📿✨
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <i class="fas fa-candy-cane"></i>
+                            <h3>Cadbury & KitKat</h3>
+                            <span>Tap to flip ↻</span>
+                        </div>
+                        <div class="flip-back">
+                            Babhaleshwar ani Khandala la tula Cadbury ani KitKat dilyavar tujhya chehryavarcha to cute anand majha favourite moment aahe! 🍫😘
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="wrap">
+            <h2>Our Love Story Milestones</h2>
+            <p class="wrap-sub">Our story is still being written...</p>
+            <div class="timeline">
+                <div class="t-node">
+                    <div class="t-date">20 November 2008</div>
+                    <h3>The Day My Queen Was Born</h3>
+                    <p>The sweetest, kindest, and most beautiful soul came into this world.</p>
+                </div>
+                <div class="t-node">
+                    <div class="t-date">7 May 2025 &bull; 24 July 2025</div>
+                    <h3>Our First Chat & First Call</h3>
+                    <p>Where our beautiful bond started—from a small chat to hearing your sweet voice on call.</p>
+                </div>
+                <div class="t-node">
+                    <div class="t-date">21 March 2026</div>
+                    <h3>First Meeting & The Guardian Bell</h3>
+                    <p>First time seeing your smile in person, our first handshake, and your special Guardian Bell gift.</p>
+                </div>
+                <div class="t-node">
+                    <div class="t-date">10 Nov 2026 &bull; 12 Nov 2026</div>
+                    <h3>Saree Video Call, Tight Hug & Bracelet</h3>
+                    <p>Babhaleshwar & Khandala meetings, 3h 9m video call, 7:15 AM tight hug with KitKat, and the bracelet from your wrist.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Redeemable Birthday Vouchers & Candle Wish -->
+        <div class="wrap">
+            <div class="voucher-vault">
+                <h2>18th Birthday Love Vouchers 🎁</h2>
+                <p>Tap any voucher to redeem it with your Husband:</p>
+                <div class="vouchers">
+                    <div class="voucher-item" onclick="redeemVoucher(this)">
+                        <strong>🍫 Unlimited Chocolates</strong>
+                        Lots of Cadbury & KitKat chocolates whenever you smile!
+                        <div class="voucher-status">Tap to Redeem</div>
+                    </div>
+                    <div class="voucher-item" onclick="redeemVoucher(this)">
+                        <strong>🤗 Tightest Hugs</strong>
+                        10-second se bhi lambe, endless warm hugs anytime!
+                        <div class="voucher-status">Tap to Redeem</div>
+                    </div>
+                    <div class="voucher-item" onclick="redeemVoucher(this)">
+                        <strong>📞 Late Night Calls</strong>
+                        3+ hours non-stop baatein sirf tumhare aur mere beech!
+                        <div class="voucher-status">Tap to Redeem</div>
+                    </div>
+                </div>
+
+                <div class="cake-box">
+                    <div style="font-size: 2.6rem;" id="cakeEmoji">🎂🕯️</div>
+                    <h3 style="color: #ffd700; margin: 6px 0;">Make Your 18th Birthday Wish, Babduu!</h3>
+                    <p style="font-size: 0.92rem; color: #ffe6ec;">Close your eyes, make a wish, and tap below to blow the candle:</p>
+                    <button class="candle-btn" id="candleBtn" onclick="blowCandle()">Make a Wish & Blow Candle ✨</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Our story is still being written... <span>Forever & Always, Your Husband</span> ❤️</p>
+        </footer>
+    </div>
+
+    <!-- Fullscreen Lightbox Modal -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lbImg" src="" alt="Preview">
+        <div class="lightbox-caption" id="lbCap"></div>
+    </div>
+
+    <script>
+        // Ambient Floating Hearts & Gold Sparkles
+        const ambientBg = document.getElementById('ambientBg');
+        const icons = ['❤️', '💖', '✨', '🍫', '🌸'];
+        setInterval(() => {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.innerText = icons[Math.floor(Math.random() * icons.length)];
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.fontSize = (Math.random() * 14 + 14) + 'px';
+            p.style.animationDuration = (Math.random() * 4 + 5) + 's';
+            ambientBg.appendChild(p);
+            setTimeout(() => p.remove(), 9000);
+        }, 480);
+
+        // Soft Built-in Web Audio Romantic Birthday Melody
+        let audioCtx = null;
+        let isPlaying = false;
+        let melodyTimer = null;
+
+        function toggleMelody() {
+            const btnText = document.getElementById('musicText');
+            if (isPlaying) {
+                isPlaying = false;
+                clearInterval(melodyTimer);
+                btnText.innerText = "Play Birthday Tune";
+                return;
+            }
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            isPlaying = true;
+            btnText.innerText = "Playing Tune ♪";
+
+            const notes = [
+                261.63, 261.63, 293.66, 261.63, 349.23, 329.63,
+                261.63, 261.63, 293.66, 261.63, 392.00, 349.23,
+                261.63, 261.63, 523.25, 440.00, 349.23, 329.63, 293.66,
+                466.16, 466.16, 440.00, 349.23, 392.00, 349.23
+            ];
+            let idx = 0;
+
+            function playNextNote() {
+                if (!isPlaying) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(notes[idx], audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.55);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.55);
+                idx = (idx + 1) % notes.length;
+            }
+
+            playNextNote();
+            melodyTimer = setInterval(playNextNote, 520);
+        }
+
+        // 20 Personalized Love Messages (1 per tap)
+        const twentyMessages = [
+            "1/20: Happy 18th Birthday, My Babduu! ❤️",
+            "2/20: 20 November 2008 — the day my dream girl was born! ✨",
+            "3/20: 7 May 2025 — hamari pehli chat ki shuruat! 💬",
+            "4/20: 24 July 2025 — pehli baar tumhari pyari awaaz suni! 📞",
+            "5/20: Tumhari wo magical smile jispar dil aa gaya! 😊",
+            "6/20: 21 March 2026 — hamari pehli mulaqat aur pehla handshake! 🤝",
+            "7/20: Tumhari di hui Guardian Bell aaj bhi sabse special hai! 🔔",
+            "8/20: Tumhare wo cute nakhre aur sharmana (laajna)! 🙈",
+            "9/20: Babhaleshwar aur Khandala ki wo yaadgar mulaqatein! 💕",
+            "10/20: Cadbury aur KitKat chocolates sirf tumhari khushi ke liye! 🍫",
+            "11/20: Saree mein tum bilkul ek dream girl lagti ho! 💃",
+            "12/20: 3 hours 9 minutes ka wo non-stop video call! 🥰",
+            "13/20: 12 November subah 7:15 AM ki hamari tight hug! 🤗",
+            "14/20: Tumhare haath ka wo bracelet meri lifetime memory hai! 📿",
+            "15/20: Tumhari aankhein aur tumhari har choti baat mujhe pasand hai! ✨",
+            "16/20: Tum sirf meri favourite person nahi, meri bayko ho! 👑",
+            "17/20: Hamari love story ka har chapter tumhare saath likhna hai! 📖",
+            "18/20: 18 saal ki ho gayi meri queen! 🎂",
+            "19/20: Bas ek aur tap... main surprise khulne wala hai! 🎁",
+            "20/20: I LOVE YOU SO MUCH, BABDUU! 😘🎉"
+        ];
+
+        let taps = 0;
+        const maxTaps = 20;
+
+        function tapHeart() {
+            if (taps >= maxTaps) return;
+
+            if (taps === 0 && !isPlaying) {
+                toggleMelody();
+            }
+
+            taps++;
+            document.getElementById('progressBar').style.width = ((taps / maxTaps) * 100) + '%';
+            document.getElementById('counterLabel').innerText = `${taps} / 20 Taps Unlocked ❤️`;
+            document.getElementById('tickerTag').innerText = `Memory #${taps} of 20`;
+            document.getElementById('tickerMsg').innerText = twentyMessages[taps - 1];
+
+            if (taps % 5 === 0 && taps < 20) {
+                confetti({
+                    particleCount: 50,
+                    spread: 65,
+                    origin: { y: 0.6 },
+                    colors: ['#ffd700', '#ff4b7d', '#ffffff']
+                });
+            }
+
+            if (taps === maxTaps) {
+                document.getElementById('heartBtn').innerHTML = "🎉<span>Unlocked!</span>";
+                confetti({
+                    particleCount: 200,
+                    spread: 110,
+                    origin: { y: 0.6 },
+                    colors: ['#ffd700', '#ff4b7d', '#00bcd4', '#ffffff']
+                });
+
+                setTimeout(() => {
+                    document.getElementById('tap-stage').style.opacity = '0';
+                    setTimeout(() => {
+                        document.getElementById('tap-stage').style.display = 'none';
+                        document.getElementById('grand-stage').style.display = 'block';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        confetti({ particleCount: 160, spread: 95, origin: { y: 0.5 } });
+                    }, 700);
+                }, 1100);
+            }
+        }
+
+        // Wax Seal Letter Open
+        function openEnvelope() {
+            document.getElementById('letterBody').style.display = 'block';
+            document.getElementById('sealHint').innerText = "Letter Unlocked ❤️";
+            confetti({ particleCount: 70, spread: 65, origin: { y: 0.6 } });
+        }
+
+        // Lightbox Controls
+        function openLightbox(src, caption, rotate) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lbImg');
+            img.src = src;
+            img.className = rotate ? 'lb-rotate' : '';
+            document.getElementById('lbCap').innerText = caption;
+            lb.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // Voucher Redeem
+        function redeemVoucher(el) {
+            const status = el.querySelector('.voucher-status');
+            status.innerText = "Redeemed! Valid Forever ❤️";
+            status.style.background = "#2e7d32";
+            status.style.color = "#fff";
+            confetti({ particleCount: 60, spread: 55, origin: { y: 0.7 } });
+        }
+
+        // Candle Blow Wish
+        function blowCandle() {
+            document.getElementById('cakeEmoji').innerText = "🎂✨🎉";
+            const btn = document.getElementById('candleBtn');
+            btn.innerText = "Wish Granted! Happy 18th Birthday, Babduu! ❤️";
+            confetti({
+                particleCount: 220,
+                spread: 120,
+                origin: { y: 0.6 },
+                colors: ['#ffd700', '#ff4b7d', '#00bcd4', '#ffffff']
+            });
+        }
+    </script>
+</body>
+</html>
