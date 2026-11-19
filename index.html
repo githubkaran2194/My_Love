@@ -412,7 +412,6 @@
             transform: scale(1.04);
         }
 
-        /* Different typography & card styles for the 100 wishes */
         .style-cursive {
             font-family: 'Great Vibes', cursive;
             font-size: 1.55rem;
@@ -444,7 +443,7 @@
             color: #ffd6e4;
         }
 
-        /* Featured Couple Portrait Showcase ("Udhaar ❤️") */
+        /* Featured Couple Portrait Showcase */
         .couple-showcase {
             max-width: 680px;
             margin: 0 auto 10px;
@@ -589,15 +588,6 @@
             transform: scale(1.07);
         }
 
-        .saree-img-box img.rotate-fix {
-            transform: rotate(-90deg) scale(1.45);
-            object-position: center center;
-        }
-
-        .saree-card:hover .saree-img-box img.rotate-fix {
-            transform: rotate(-90deg) scale(1.55);
-        }
-
         .saree-meta {
             padding: 15px 14px;
         }
@@ -611,6 +601,85 @@
         .saree-meta p {
             font-size: 0.85rem;
             color: #666;
+        }
+
+        /* ================= VIDEO CALL 3D MEMORY CARD ================= */
+        .memory-card {
+            max-width: 540px;
+            height: 320px;
+            margin: 0 auto;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .memory-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+        }
+
+        .memory-card.flipped .memory-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .memory-card-front, .memory-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 16px 38px rgba(194, 24, 91, 0.25);
+            border: 3px solid var(--gold);
+        }
+
+        .memory-card-front {
+            background: #1a0812;
+        }
+
+        .memory-card-back {
+            background: linear-gradient(135deg, #0f2942, #ad1457);
+            color: var(--white);
+            transform: rotateY(180deg);
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .memory-card-back h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .memory-card-back p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffe6ee;
+        }
+
+        .card-badge {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(194, 24, 91, 0.9);
+            color: #fff;
+            border: 1px solid var(--gold);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            white-space: nowrap;
         }
 
         /* Fullscreen Photo Lightbox */
@@ -633,12 +702,6 @@
             border-radius: 16px;
             border: 3px solid var(--gold);
             box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7);
-        }
-
-        .lightbox img.lb-rotate {
-            transform: rotate(-90deg);
-            max-width: 65vh;
-            max-height: 85vw;
         }
 
         .lightbox-caption {
@@ -863,6 +926,7 @@
             .tap-vault h1 { font-size: 2.75rem; }
             .royal-hero h1 { font-size: 3.4rem; }
             .crown-frame { width: 170px; height: 170px; }
+            .memory-card { height: 240px; }
         }
     </style>
 </head>
@@ -926,7 +990,7 @@
             </div>
         </div>
 
-        <!-- Featured Couple Portrait ("Udhaar ❤️") -->
+        <!-- Featured Couple Portrait Showcase -->
         <div class="wrap" id="our-couple-pic">
             <h2>Together Forever</h2>
             <p class="wrap-sub">You & Me — My Favourite Frame in the World</p>
@@ -1005,13 +1069,34 @@
                     </div>
                 </div>
 
-                <div class="saree-card" onclick="openLightbox('./Images/retouch_2026111422455497.jpg', 'Golden Sunlight Glow — Forever my favourite view 😘', true)">
+                <div class="saree-card" onclick="openLightbox('./Images/retouch_2026111422455497.jpg', 'Golden Sunlight Glow — Forever my favourite view 😘', false)">
                     <div class="saree-img-box">
                         <img src="./Images/retouch_2026111422455497.jpg" alt="Sunlight Glow">
                     </div>
                     <div class="saree-meta">
                         <h4>Golden Sunlight Glow</h4>
                         <p>Forever my favourite view 😘</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Call 3D Flip Memory Card -->
+        <div class="wrap" id="video-call-memory">
+            <h2>Our Video Call Moments</h2>
+            <p class="wrap-sub">Tap the photo below to flip and read a special note 💕</p>
+            <div class="memory-card" onclick="this.classList.toggle('flipped')">
+                <div class="memory-card-inner">
+                    <div class="memory-card-front">
+                        <img src="./Images/VC.jpg" alt="Our Video Call Memory" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div class="card-badge">📞 Favorite Call (Tap to Flip ↻)</div>
+                    </div>
+                    <div class="memory-card-back">
+                        <h3>Late Night Video Calls 💕</h3>
+                        <p>
+                            Door aslo tari tujha hasra chehra pahila ki sagla thakva nighun jato, Babduu! 
+                            He chote-chote video call moments majhya sathi saglyat special aahet. ❤️
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1074,7 +1159,7 @@
                     <p>The sweetest, kindest, and most beautiful soul came into this world.</p>
                 </div>
                 <div class="t-node">
-                    <div class="t-date">7 May 2025 &bull; 24 July 2025</div>
+                    <div class="t-date">7 May 2025 • 24 July 2025</div>
                     <h3>Our First Chat & First Call</h3>
                     <p>Where our beautiful bond started—from a small chat to hearing your sweet voice on call.</p>
                 </div>
@@ -1084,14 +1169,14 @@
                     <p>First time seeing your smile in person, our first handshake, and your special Guardian Bell gift.</p>
                 </div>
                 <div class="t-node">
-                    <div class="t-date">10 Nov 2026 &bull; 12 Nov 2026</div>
+                    <div class="t-date">10 Nov 2026 • 12 Nov 2026</div>
                     <h3>Saree Video Call, Tight Hug & Bracelet</h3>
                     <p>Babhaleshwar & Khandala meetings, 3h 9m video call, 7:15 AM tight hug with KitKat, and the bracelet from your wrist.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Redeemable Birthday Vouchers & Candle Wish -->
+        <!-- Redeemable Gift Vouchers & Candle Wish -->
         <div class="wrap">
             <div class="voucher-vault">
                 <h2>18th Birthday Love Vouchers 🎁</h2>
@@ -1130,7 +1215,7 @@
 
     <!-- Fullscreen Lightbox Modal -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close">&times;</span>
+        <span class="lightbox-close">×</span>
         <img id="lbImg" src="" alt="Preview">
         <div class="lightbox-caption" id="lbCap"></div>
     </div>
@@ -1241,7 +1326,7 @@
             "17/17: UNLOCKED! Happy Birthday My Wife x 100! 🎉👑❤️"
         ];
 
-        let currentRound = 1; // 1 = 20 taps, 2 = 17 taps
+        let currentRound = 1;
         let taps = 0;
         let targetTaps = 20;
 
@@ -1266,7 +1351,6 @@
                     confetti({ particleCount: 45, spread: 60, origin: { y: 0.6 }, colors: ['#ffd700', '#ff4b7d', '#ffffff'] });
                 }
 
-                // Transition from 20 Taps to 17 Taps!
                 if (taps === 20) {
                     confetti({ particleCount: 140, spread: 90, origin: { y: 0.6 }, colors: ['#ffd700', '#ff4b7d', '#00bcd4'] });
                     document.getElementById('heartBtn').innerHTML = "✨<span>Next Level</span>";
@@ -1298,7 +1382,6 @@
                     confetti({ particleCount: 55, spread: 70, origin: { y: 0.6 }, colors: ['#ffd700', '#00bcd4', '#ffffff'] });
                 }
 
-                // Unlock Grand Stage + 100 Wishes!
                 if (taps === 17) {
                     document.getElementById('heartBtn').innerHTML = "👑<span>Unlocked!</span>";
                     confetti({
@@ -1367,11 +1450,10 @@
         }
 
         // Lightbox Controls
-        function openLightbox(src, caption, rotate) {
+        function openLightbox(src, caption) {
             const lb = document.getElementById('lightbox');
             const img = document.getElementById('lbImg');
             img.src = src;
-            img.className = rotate ? 'lb-rotate' : '';
             document.getElementById('lbCap').innerText = caption;
             lb.style.display = 'flex';
         }
