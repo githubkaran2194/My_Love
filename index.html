@@ -84,7 +84,7 @@
             100% { transform: translateY(-108vh) rotate(360deg) scale(1.2); opacity: 0; }
         }
 
-        /* ================= STAGE 1: 20 TAPS OF LOVE ================= */
+        /* ================= STAGE 1 & STAGE 2: TAP VAULT (20 TAPS -> 17 TAPS) ================= */
         #tap-stage {
             position: relative;
             z-index: 2;
@@ -107,6 +107,13 @@
             padding: 36px 24px;
             text-align: center;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(255, 215, 0, 0.08);
+            transition: all 0.5s ease;
+        }
+
+        .tap-vault.stage-two-theme {
+            background: linear-gradient(145deg, rgba(15, 41, 66, 0.72), rgba(136, 14, 79, 0.55));
+            border: 1.5px solid #ffd700;
+            box-shadow: 0 30px 60px rgba(255, 215, 0, 0.2), inset 0 0 30px rgba(0, 188, 212, 0.15);
         }
 
         .gold-pill {
@@ -179,9 +186,14 @@
             justify-content: center;
             align-items: center;
             margin: 0 auto 22px;
-            transition: transform 0.12s ease;
+            transition: transform 0.12s ease, background 0.4s ease;
             user-select: none;
             animation: heartbeat 1.5s infinite;
+        }
+
+        .heart-btn.stage-two-btn {
+            background: radial-gradient(circle at 30% 30%, #ffd700 0%, #ff6f00 75%, #b71c1c 100%);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.55);
         }
 
         .heart-btn span {
@@ -231,7 +243,7 @@
             line-height: 1.5;
         }
 
-        /* ================= STAGE 2: GRAND 18TH BIRTHDAY EXPERIENCE ================= */
+        /* ================= STAGE 3: GRAND 18TH BIRTHDAY EXPERIENCE ================= */
         #grand-stage {
             display: none;
             position: relative;
@@ -325,7 +337,7 @@
         .wrap {
             max-width: 1040px;
             margin: 0 auto;
-            padding: 70px 20px;
+            padding: 65px 20px;
             text-align: center;
         }
 
@@ -339,13 +351,103 @@
         .wrap-sub {
             color: #6b535e;
             font-size: 0.98rem;
-            margin-bottom: 36px;
+            margin-bottom: 34px;
+        }
+
+        /* ================= 100 TIMES "HAPPY BIRTHDAY MY WIFE" WALL ================= */
+        .hundred-wall-box {
+            background: linear-gradient(145deg, #2b0918, #140812);
+            border: 2px solid var(--gold);
+            border-radius: 26px;
+            padding: 36px 22px;
+            box-shadow: 0 20px 50px rgba(43, 9, 24, 0.28);
+            color: var(--white);
+        }
+
+        .hundred-wall-box h2 {
+            color: var(--gold);
+            font-size: 3.4rem;
+        }
+
+        .hundred-wall-box p.wall-desc {
+            color: #ffdce5;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        .wishes-100-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 12px;
+            max-height: 540px;
+            overflow-y: auto;
+            padding: 10px;
+            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+        }
+
+        .wishes-100-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+        .wishes-100-grid::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+        }
+
+        .wish-chip {
+            padding: 12px 14px;
+            border-radius: 14px;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 58px;
+            transition: transform 0.2s ease;
+            line-height: 1.35;
+        }
+
+        .wish-chip:hover {
+            transform: scale(1.04);
+        }
+
+        /* Different typography & card styles for the 100 wishes */
+        .style-cursive {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.55rem;
+            background: linear-gradient(135deg, rgba(255, 75, 125, 0.28), rgba(194, 24, 91, 0.35));
+            border: 1px solid rgba(255, 182, 193, 0.45);
+            color: #ffe082;
+        }
+
+        .style-serif {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 600;
+            background: linear-gradient(135deg, rgba(15, 41, 66, 0.75), rgba(26, 58, 95, 0.65));
+            border: 1px solid rgba(0, 188, 212, 0.45);
+            color: #ffffff;
+        }
+
+        .style-gold {
+            font-weight: 600;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.22), rgba(255, 143, 0, 0.25));
+            border: 1px solid rgba(255, 215, 0, 0.6);
+            color: #ffd700;
+        }
+
+        .style-glass {
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            color: #ffd6e4;
         }
 
         /* Featured Couple Portrait Showcase ("Udhaar ❤️") */
         .couple-showcase {
             max-width: 680px;
-            margin: 0 auto 20px;
+            margin: 0 auto 10px;
             background: linear-gradient(145deg, #4b071c, #24050f);
             border: 2px solid var(--gold);
             border-radius: 26px;
@@ -773,13 +875,13 @@
 
     <div class="ambient-bg" id="ambientBg"></div>
 
-    <!-- ================= STAGE 1: 20 TAPS OF LOVE ================= -->
+    <!-- ================= STAGE 1 (20 TAPS) & STAGE 2 (17 TAPS) ================= -->
     <div id="tap-stage">
-        <div class="tap-vault">
-            <div class="gold-pill">✨ Born 20 Nov 2008 &bull; 20 Taps of Love ✨</div>
-            <h1>20 Taps For My Babduu!</h1>
-            <p class="tap-sub">
-                20 November sathi 20 special taps! Pratyek tap var aapli ek memory unlock hoil, ani <strong>20th tap</strong> var tujha Grand 18th Birthday Surprise open hoil 😘
+        <div class="tap-vault" id="tapVault">
+            <div class="gold-pill" id="stageBadge">✨ Step 1: 20 Taps For 20 November ✨</div>
+            <h1 id="stageHeading">20 Taps For My Babduu!</h1>
+            <p class="tap-sub" id="stageSub">
+                20 November sathi 20 special taps! Pratyek tap var aapli ek memory unlock hoil, ani <strong>20th tap</strong> nantar next surprise level khulel 😘
             </p>
 
             <div class="progress-track">
@@ -789,7 +891,7 @@
 
             <button class="heart-btn" id="heartBtn" onclick="tapHeart()">
                 ❤️
-                <span>Tap Here</span>
+                <span id="btnLabel">Tap Here</span>
             </button>
 
             <div class="memory-ticker">
@@ -799,32 +901,41 @@
         </div>
     </div>
 
-    <!-- ================= STAGE 2: GRAND 18TH BIRTHDAY EXPERIENCE ================= -->
+    <!-- ================= STAGE 3: GRAND 18TH BIRTHDAY EXPERIENCE ================= -->
     <div id="grand-stage">
         <!-- Royal Hero -->
         <div class="royal-hero">
             <div class="crown-frame">
-                <img src="./Images/retouch_2026111422393541.jpg" alt="My Queen Snehal" >
+                <img src="./Images/retouch_2026111422393541.jpg" alt="My Queen Snehal">
             </div>
-            <div class="gold-pill">👑 20 November 2008 — Celebrating 18 Years 👑</div>
+            <div class="gold-pill">👑 20 Taps + 17 Taps Completed • 18th Birthday 👑</div>
             <h1>Happy 18th Birthday, Snehal!</h1>
             <p>
-                20 taps poore zale, Majhi Bayko! ❤️<br>
-                Welcome to your personal birthday world—crafted with endless love by your Husband!
+                20 taps + 17 special taps poore zale, Majhi Bayko! ❤️<br>
+                Niche tumhare Husband ki taraf se 100 alag-alag andaz mein Birthday Wishes aur hamari poori love story hai!
             </p>
-            <a href="#our-couple-pic" class="hero-cta">See Our Special Moment ❤️</a>
+            <a href="#hundred-wishes" class="hero-cta">See 100x Happy Birthday My Wife ❤️</a>
+        </div>
+
+        <!-- 100 TIMES "HAPPY BIRTHDAY MY WIFE" IN DIFFERENT STYLES -->
+        <div class="wrap" id="hundred-wishes">
+            <div class="hundred-wall-box">
+                <h2>100 Times: Happy Birthday My Wife ❤️</h2>
+                <p class="wall-desc">100 alag-alag styles, fonts, aur pyare andaaz mein sirf tumhare liye, Babduu! ✨</p>
+                <div class="wishes-100-grid" id="wishes100Grid"></div>
+            </div>
         </div>
 
         <!-- Featured Couple Portrait ("Udhaar ❤️") -->
         <div class="wrap" id="our-couple-pic">
             <h2>Together Forever</h2>
             <p class="wrap-sub">You & Me — My Favourite Frame in the World</p>
-            <div class="couple-showcase" onclick="openLightbox('./Images/Both.jpg', 'Udhaar ❤️ — Forever Together, Majhi Bayko & Your Husband 😘', false)">
+            <div class="couple-showcase" onclick="openLightbox('./Images/Both.jpg', 'ME ❤️ MY LOVE— Forever Together, Majhi Bayko & Your Husband 😘', false)">
                 <div class="couple-img-frame">
                     <img src="./Images/Both.jpg" alt="Us Together - Udhaar">
                 </div>
                 <div class="couple-caption">
-                    <h3>Me❤️Love</h3>
+                    <h3>ME ❤️ MY LOVE</h3>
                     <p>Sending you endless flying kisses & love on your 18th Birthday! (Tap photo to zoom)</p>
                 </div>
             </div>
@@ -1085,8 +1196,8 @@
             melodyTimer = setInterval(playNextNote, 520);
         }
 
-        // 20 Personalized Love Messages (1 per tap)
-        const twentyMessages = [
+        // Round 1: 20 Messages (for 20 November)
+        const round1Messages = [
             "1/20: Happy 18th Birthday, My Babduu! ❤️",
             "2/20: 20 November 2008 — the day my dream girl was born! ✨",
             "3/20: 7 May 2025 — hamari pehli chat ki shuruat! 💬",
@@ -1105,55 +1216,148 @@
             "16/20: Tum sirf meri favourite person nahi, meri bayko ho! 👑",
             "17/20: Hamari love story ka har chapter tumhare saath likhna hai! 📖",
             "18/20: 18 saal ki ho gayi meri queen! 🎂",
-            "19/20: Bas ek aur tap... main surprise khulne wala hai! 🎁",
-            "20/20: I LOVE YOU SO MUCH, BABDUU! 😘🎉"
+            "19/20: Ek aur tap aur Round 1 complete! 🎉",
+            "20/20: 20 Taps Complete! Ab 17 Special Taps aur baaki hain! ✨"
         ];
 
+        // Round 2: 17 Messages (for 17 October / 17 Special Wishes)
+        const round2Messages = [
+            "1/17: Level 2 Unlocked! 17 October se 20 November tak ka safar! ❤️",
+            "2/17: 17 October ko tumhare diye hue gifts aaj bhi dil ke paas hain! 🎁",
+            "3/17: Tumhara wo handwritten letter aur lighting ball! 💡💌",
+            "4/17: Har din tumse aur zyada pyaar hota ja raha hai! 💕",
+            "5/17: Tumhari awaaz sunte hi saari thakan door ho jaati hai! 📞",
+            "6/17: Chote Mami ke dukaan ke paas wali wo choti si mulaqat! 😊",
+            "7/17: Red & Blue saree mein tum kisi angel se kam nahi lagti! 👗",
+            "8/17: Tumhari har khushi meri sabse badi dua hai! 🤲✨",
+            "9/17: Jab tum hasti ho toh poori duniya khoobsurat lagti hai! 🌸",
+            "10/17: Hamari 'Udhaar ❤️' wali yaadein hamesha saath rahengi! 📸",
+            "11/17: Tum meri jaan, meri Babduu, aur meri duniya ho! 🌍❤️",
+            "12/17: Aane wale har birthday par main tumhare saath rahunga! 🎂",
+            "13/17: Tumhare bina ek pal bhi adhoora lagta hai! 💞",
+            "14/17: Bas 3 taps aur... 100x Birthday Wishes khulne wale hain! 🎊",
+            "15/17: Taiyar ho jao, Majhi Bayko! 😘",
+            "16/17: Last 1 tap remaining... Dil thaam lo! 💓",
+            "17/17: UNLOCKED! Happy Birthday My Wife x 100! 🎉👑❤️"
+        ];
+
+        let currentRound = 1; // 1 = 20 taps, 2 = 17 taps
         let taps = 0;
-        const maxTaps = 20;
+        let targetTaps = 20;
 
         function tapHeart() {
-            if (taps >= maxTaps) return;
+            if (currentRound === 1 && taps >= 20) return;
+            if (currentRound === 2 && taps >= 17) return;
 
-            if (taps === 0 && !isPlaying) {
+            if (currentRound === 1 && taps === 0 && !isPlaying) {
                 toggleMelody();
             }
 
             taps++;
-            document.getElementById('progressBar').style.width = ((taps / maxTaps) * 100) + '%';
-            document.getElementById('counterLabel').innerText = `${taps} / 20 Taps Unlocked ❤️`;
-            document.getElementById('tickerTag').innerText = `Memory #${taps} of 20`;
-            document.getElementById('tickerMsg').innerText = twentyMessages[taps - 1];
+            const percent = (taps / targetTaps) * 100;
+            document.getElementById('progressBar').style.width = percent + '%';
 
-            if (taps % 5 === 0 && taps < 20) {
-                confetti({
-                    particleCount: 50,
-                    spread: 65,
-                    origin: { y: 0.6 },
-                    colors: ['#ffd700', '#ff4b7d', '#ffffff']
-                });
-            }
+            if (currentRound === 1) {
+                document.getElementById('counterLabel').innerText = `${taps} / 20 Taps Unlocked ❤️`;
+                document.getElementById('tickerTag').innerText = `Round 1 • Tap #${taps} of 20`;
+                document.getElementById('tickerMsg').innerText = round1Messages[taps - 1];
 
-            if (taps === maxTaps) {
-                document.getElementById('heartBtn').innerHTML = "🎉<span>Unlocked!</span>";
-                confetti({
-                    particleCount: 200,
-                    spread: 110,
-                    origin: { y: 0.6 },
-                    colors: ['#ffd700', '#ff4b7d', '#00bcd4', '#ffffff']
-                });
+                if (taps % 5 === 0 && taps < 20) {
+                    confetti({ particleCount: 45, spread: 60, origin: { y: 0.6 }, colors: ['#ffd700', '#ff4b7d', '#ffffff'] });
+                }
 
-                setTimeout(() => {
-                    document.getElementById('tap-stage').style.opacity = '0';
+                // Transition from 20 Taps to 17 Taps!
+                if (taps === 20) {
+                    confetti({ particleCount: 140, spread: 90, origin: { y: 0.6 }, colors: ['#ffd700', '#ff4b7d', '#00bcd4'] });
+                    document.getElementById('heartBtn').innerHTML = "✨<span>Next Level</span>";
+
                     setTimeout(() => {
-                        document.getElementById('tap-stage').style.display = 'none';
-                        document.getElementById('grand-stage').style.display = 'block';
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                        confetti({ particleCount: 160, spread: 95, origin: { y: 0.5 } });
-                    }, 700);
-                }, 1100);
+                        currentRound = 2;
+                        taps = 0;
+                        targetTaps = 17;
+
+                        const vault = document.getElementById('tapVault');
+                        vault.classList.add('stage-two-theme');
+                        document.getElementById('stageBadge').innerText = "✨ Step 2: 17 Special Taps Challenge ✨";
+                        document.getElementById('stageHeading').innerText = "Now 17 Taps, Majhi Bayko!";
+                        document.getElementById('stageSub').innerHTML = "20 taps poore hue! Ab <strong>17 special taps</strong> aur karo—uske baad <strong>100x Happy Birthday My Wife</strong> khulega! 😘";
+                        document.getElementById('progressBar').style.width = '0%';
+                        document.getElementById('counterLabel').innerText = "0 / 17 Taps Unlocked 💛";
+                        document.getElementById('heartBtn').classList.add('stage-two-btn');
+                        document.getElementById('heartBtn').innerHTML = "💛<span>Tap 17x</span>";
+                        document.getElementById('tickerTag').innerText = "Round 2 Ready!";
+                        document.getElementById('tickerMsg').innerText = "17 baar aur tap kar, Babduu! 🎁";
+                    }, 1100);
+                }
+            } else if (currentRound === 2) {
+                document.getElementById('counterLabel').innerText = `${taps} / 17 Taps Unlocked 💛`;
+                document.getElementById('tickerTag').innerText = `Round 2 • Tap #${taps} of 17`;
+                document.getElementById('tickerMsg').innerText = round2Messages[taps - 1];
+
+                if (taps % 5 === 0 && taps < 17) {
+                    confetti({ particleCount: 55, spread: 70, origin: { y: 0.6 }, colors: ['#ffd700', '#00bcd4', '#ffffff'] });
+                }
+
+                // Unlock Grand Stage + 100 Wishes!
+                if (taps === 17) {
+                    document.getElementById('heartBtn').innerHTML = "👑<span>Unlocked!</span>";
+                    confetti({
+                        particleCount: 240,
+                        spread: 120,
+                        origin: { y: 0.6 },
+                        colors: ['#ffd700', '#ff4b7d', '#00bcd4', '#ffffff']
+                    });
+
+                    setTimeout(() => {
+                        document.getElementById('tap-stage').style.opacity = '0';
+                        setTimeout(() => {
+                            document.getElementById('tap-stage').style.display = 'none';
+                            document.getElementById('grand-stage').style.display = 'block';
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            confetti({ particleCount: 180, spread: 100, origin: { y: 0.5 } });
+                        }, 700);
+                    }, 1100);
+                }
             }
         }
+
+        // Generate 100 Different Styles of "Happy Birthday My Wife"
+        function buildHundredWishes() {
+            const grid = document.getElementById('wishes100Grid');
+            const variations = [
+                "Happy Birthday My Wife ❤️",
+                "Happy Birthday, My Wife! 🎂",
+                "✨ Happy Birthday My Wife ✨",
+                "Happy Birthday My Lovely Wife 💕",
+                "Happy Birthday My Wife (Babduu) 😘",
+                "👑 Happy Birthday My Queen & Wife 👑",
+                "Happy 18th Birthday My Wife! 🎉",
+                "💖 Happy Birthday My Beautiful Wife 💖",
+                "Happy Birthday Majhi Bayko (My Wife) ❤️",
+                "🌹 Happy Birthday My Dearest Wife 🌹",
+                "Happy Birthday My Dream Girl & Wife ✨",
+                "🍫 Happy Birthday My Sweet Wife 🍫",
+                "Happy Birthday My Forever Wife 💞",
+                "🥰 Happy Birthday My Cute Wife 🥰",
+                "Happy Birthday My Soulmate & Wife 💫",
+                "💐 Happy Birthday My Gorgeous Wife 💐",
+                "Happy Birthday My Life, My Wife ❤️",
+                "🌟 Happy Birthday My Precious Wife 🌟",
+                "Happy Birthday My Best Friend & Wife 🤝❤️",
+                "💍 Happy Birthday My Wife Forever 💍"
+            ];
+            const styles = ['style-cursive', 'style-serif', 'style-gold', 'style-glass'];
+
+            for (let i = 1; i <= 100; i++) {
+                const chip = document.createElement('div');
+                const styleClass = styles[(i - 1) % styles.length];
+                const textVariant = variations[(i - 1) % variations.length];
+                chip.className = `wish-chip ${styleClass}`;
+                chip.innerHTML = `<span style="font-size:0.7rem; opacity:0.75; margin-right:6px;">#${i}</span> ${textVariant}`;
+                grid.appendChild(chip);
+            }
+        }
+        buildHundredWishes();
 
         // Wax Seal Letter Open
         function openEnvelope() {
